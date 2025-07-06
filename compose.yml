@@ -8,6 +8,9 @@ services:
     environment:
       - "DB_PORT=3306"
       - "DB_HOST=mysql"
+      - "DB_NAME=php_db"
+      - "DB_USER=user"
+      - "DB_PASSWORD=secret"
       - "XDG_CONFIG_HOME=/app"
     ports:
       - "80:80"
@@ -22,6 +25,9 @@ services:
     environment:
       - "DB_PORT=3306"
       - "DB_HOST=mysql"
+      - "DB_NAME=php_db"
+      - "DB_USER=user"
+      - "DB_PASSWORD=secret"
     networks:
       - php_network
     extra_hosts:

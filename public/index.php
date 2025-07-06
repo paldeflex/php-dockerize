@@ -1,6 +1,12 @@
++9-2
 <?php
+require __DIR__ . '/../vendor/autoload.php';
+
+use App\Example;
 
 echo "PHP is working<br>";
+
+echo Example::message() . "<br>";
 
 if (extension_loaded('xdebug')) {
     echo "Xdebug is enabled<br>";
@@ -26,5 +32,7 @@ try {
     $pdo = new PDO($dsn, $user, $pass, $options);
     echo "MySQL connection successful<br>";
 } catch (PDOException $e) {
-    echo "MySQL connection failed: " . $e->getMessage();
+    error_log($e->getMessage());
+    http_response_code(500);
+    echo "MySQL connection failed";
 }

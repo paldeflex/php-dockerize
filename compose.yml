@@ -1,31 +1,47 @@
 services:
   nginx:
+    container_name: nginx
     build:
       context: ./docker/nginx
       dockerfile: Dockerfile
     volumes:
-      - ./src:/var/www
+      - ./public:/var/www/public
     env_file:
       - .env
     environment:
       - "XDG_CONFIG_HOME=/app"
     ports:
-      - "80:80"
+      - "8080:80"
+    depends_on:
+      - php-fpm
+    restart: unless-stopped
     networks:
       - php_network
+
   php-fpm:
+    container_name: php-fpm
     build:
       context: ./docker/php-fpm
       dockerfile: Dockerfile
     volumes:
-      - ./src:/var/www
+      - ./:/var/www
     env_file:
       - .env
-    networks:
-      - php_network
+    depends_on:
+      - mysql
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD-SHELL", "php -m >/dev/null" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
     extra_hosts:
       - host.docker.internal:host-gateway
+    networks:
+      - php_network
+
   mysql:
+    container_name: mysql
     image: mysql
     volumes:
       - database:/var/lib/mysql
@@ -33,10 +49,18 @@ services:
       - .env
     ports:
       - "3306:3306"
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     networks:
       - php_network
+
 volumes:
   database:
+
 networks:
   php_network:
     name: php_network

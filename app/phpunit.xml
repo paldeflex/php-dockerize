@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit
+        bootstrap="vendor/autoload.php"
+        colors="true"
+        stopOnFailure="false"
+>
+    <testsuites>
+        <testsuite name="App Test Suite">
+            <directory>tests</directory>
+        </testsuite>
+    </testsuites>
+
+    <php>
+        <env name="DB_HOST" value="${DB_HOST}"/>
+        <env name="DB_PORT" value="${DB_PORT}"/>
+        <env name="DB_DATABASE" value="${DB_TEST_DATABASE}"/>
+        <env name="DB_USERNAME" value="${DB_USERNAME}"/>
+        <env name="DB_PASSWORD" value="${DB_PASSWORD}"/>
+    </php>
+</phpunit>

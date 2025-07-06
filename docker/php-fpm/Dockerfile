@@ -20,4 +20,8 @@ RUN pecl install xdebug \
 
 COPY ./xdebug/xdebug.ini "$PHP_INI_DIR/conf.d"
 
+# Enable error logging to a dedicated file
+RUN mkdir -p /var/log/php
+COPY ./error.ini "$PHP_INI_DIR/conf.d"
+
 WORKDIR /var/www

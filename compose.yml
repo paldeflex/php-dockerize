@@ -2,6 +2,8 @@ services:
   nginx:
     container_name: nginx
     image: nginx:latest
+    depends_on:
+      - php
     networks:
       - php_network
     ports:
@@ -11,6 +13,8 @@ services:
       - ./app:/var/www/html
   php:
     container_name: php
+    depends_on:
+      - mysql
     build:
       dockerfile: ./php/Dockerfile
     networks:

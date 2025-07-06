@@ -16,5 +16,5 @@
   },
   "scripts": {
     "run-phpunit": "vendor/bin/phpunit"
-  },
+  }
 }

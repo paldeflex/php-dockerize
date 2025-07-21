@@ -1,6 +1,6 @@
 # Docker-сборка для PHP
 
-Этот репозиторий содержит примерную конфигурацию Docker для запуска PHP-приложения с Nginx, MySQL и Xdebug. Службы описаны в `compose.yml`.
+Сборка содержит конфигурацию Docker для запуска PHP-приложения с Nginx, MySQL и Xdebug. Службы описаны в `compose.yml`.
 
 ## Содержимое
 - `php/Dockerfile` — образ PHP 8.4 с Composer и Xdebug.

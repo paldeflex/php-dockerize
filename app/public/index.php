@@ -40,6 +40,19 @@ if (!function_exists('dump')) {
 echo '✔ symfony/var-dumper доступен:<br>';
 dump(['status' => 'ok', 'time' => date('Y-m-d H:i:s')]);
 
+$requiredEnv = ['DB_HOST','DB_PORT','DB_DATABASE','DB_USERNAME','DB_PASSWORD'];
+$missing = [];
+foreach ($requiredEnv as $key) {
+    $val = getenv($key);
+    if ($val === false || $val === '') {
+        $missing[] = $key;
+    }
+}
+if ($missing) {
+    exit('✘ Ошибка: не заданы переменные окружения: ' . implode(', ', $missing) . '<br>');
+}
+echo '✔ Переменные окружения заданы<br>';
+
 $dbHost = getenv('DB_HOST');
 $dbPort = getenv('DB_PORT');
 $dbName = getenv('DB_DATABASE');

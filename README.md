@@ -17,7 +17,11 @@
    ```bash
    docker compose up -d --build
    ```
-3. Перейдите по адресу [http://localhost](http://localhost) и убедитесь, что сервисы работают.
+3. Установите зависимости composer
+   ```bash
+   docker compose exec php composer install
+   ```
+5. Перейдите по адресу [http://localhost](http://localhost) и убедитесь, что сервисы работают.
 
 ## Тесты
 Для выполнения тестов PHPUnit используйте команду:
